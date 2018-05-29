@@ -17,7 +17,7 @@ public:
 };
 void CFeet::setvalue(int fe, int in)
 {
-	feet = fe-(in/12)*12;
+	feet = fe;
 	inches =in ;
 }
 void CFeet::display()
@@ -34,18 +34,41 @@ void CFeet::display()
 CFeet CFeet::operator-(CFeet &objf)
 {
 	CFeet temp;
-	inches = feet * 12 + inches;
-	objf.inches = objf.feet * 12 + objf.inches;
-	sum = inches - objf.inches;
-	feet = sum / 12;
-	inches = sum % 12;
+	if (feet > 0)
+	{
+		temp.setvalue(inches = feet * 12 + inches, objf.inches = objf.feet * 12 + objf.inches);
+		if (inches < objf.inches)
+		{
+			temp.inches = (inches - objf.inches) % 12;
+			if (temp.inches < 0)
+			{
+				temp.inches = inches*(-1);
+			}
+		}
+		else
+		{
+			temp.inches = (inches - objf.inches) % 12 ;
+			if (temp.inches < 0)
+			{
+				temp.inches = inches*(-1);
+			}
+		}
+
+		temp.feet = (inches - objf.inches) / 12;
+	}
+	if (feet < 0)
+	{
+		temp.setvalue(inches = feet * 12 - inches, objf.inches = objf.feet * 12 + objf.inches);
+		temp.inches = (inches - objf.inches) % 12 * (-1);
+	}
+	temp.feet = (inches - objf.inches) / 12;
 	return temp;
 }
 int main()
 {
 	CFeet A, B,C;
-	A.setvalue(1, 1);
-	B.setvalue(2, 2);
+	A.setvalue(-3,2);
+	B.setvalue(1,5);
 	C = A - B;
 	C.display();
     return 0;
