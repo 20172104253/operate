@@ -58,8 +58,16 @@ CFeet CFeet::operator-(CFeet &objf)
 	}
 	if (feet < 0)
 	{
-		temp.setvalue(inches = feet * 12 - inches, objf.inches = objf.feet * 12 + objf.inches);
-		temp.inches = (inches - objf.inches) % 12 * (-1);
+		if (feet > objf.feet)
+		{
+			temp.setvalue(inches = feet * 12 - inches, objf.inches = objf.feet * 12 - objf.inches);
+			temp.inches = (inches - objf.inches) % 12;
+		}
+		else
+		{
+			temp.setvalue(inches = feet * 12 - inches, objf.inches = objf.feet * 12 - objf.inches);
+			temp.inches = (inches - objf.inches) % 12 * (-1);
+		}
 	}
 	temp.feet = (inches - objf.inches) / 12;
 	return temp;
@@ -67,8 +75,8 @@ CFeet CFeet::operator-(CFeet &objf)
 int main()
 {
 	CFeet A, B,C;
-	A.setvalue(-2,6);
-	B.setvalue(-3,8);
+	A.setvalue(-2,2);
+	B.setvalue(-4,8);
 	C = A - B;
 	C.display();
     return 0;
