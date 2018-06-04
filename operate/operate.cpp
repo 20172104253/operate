@@ -67,8 +67,8 @@ CFeet CFeet::operator-(CFeet &objf)
 int main()
 {
 	CFeet A, B,C;
-	A.setvalue(-3,2);
-	B.setvalue(1,5);
+	A.setvalue(-2,6);
+	B.setvalue(-3,8);
 	C = A - B;
 	C.display();
     return 0;
